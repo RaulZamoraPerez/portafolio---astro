@@ -1,0 +1,144 @@
+---
+// LogoLoop.astro — infinite scrolling tech logos optimized with SimpleIcons
+const logos = [
+  { name: ".NET 8", slug: "dotnet", color: "#512bd4" },
+  { name: "C#", slug: "csharp", color: "#239120" },
+  { name: "Angular 19", slug: "angular", color: "#dd0031" },
+  { name: "React Native", slug: "react", color: "#61dafb" },
+  { name: "Vue.js", slug: "vuedotjs", color: "#4fc08d" },
+  { name: "Next.js 15", slug: "nextdotjs", color: "#ffffff" },
+  { name: "TypeScript", slug: "typescript", color: "#3178c6" },
+  { name: "Node.js", slug: "nodedotjs", color: "#339933" },
+  { name: "NestJS", slug: "nestjs", color: "#e0234e" },
+  { name: "Laravel", slug: "laravel", color: "#ff2d20" },
+  { name: "Sass", slug: "sass", color: "#cc6699" },
+  { name: "PostgreSQL", slug: "postgresql", color: "#4169e1" },
+  { name: "MongoDB", slug: "mongodb", color: "#47a248" },
+  { name: "MySQL", slug: "mysql", color: "#4479a1" },
+  { name: "Prisma", slug: "prisma", color: "#2d3748" },
+  { name: "Docker", slug: "docker", color: "#2496ed" },
+  { name: "AWS S3", slug: "amazonaws", color: "#ff9900" },
+  { name: "Figma", slug: "figma", color: "#f24e1e" },
+  { name: "Git", slug: "git", color: "#f05032" }
+];
+---
+
+<div class="logo-loop-container">
+  <div class="logo-track">
+    {[...logos, ...logos].map((logo) => (
+      <div class="logo-item" style={`--brand-color: ${logo.color}`}>
+        <div class="icon-box">
+          <img 
+            src={`https://cdn.simpleicons.org/${logo.slug}/white`} 
+            alt={logo.name} 
+            class="base-logo"
+            loading="lazy"
+          />
+          <img 
+            src={`https://cdn.simpleicons.org/${logo.slug}`} 
+            alt={logo.name} 
+            class="color-logo"
+            loading="lazy"
+          />
+        </div>
+        <span class="logo-label">{logo.name}</span>
+      </div>
+    ))}
+  </div>
+</div>
+
+<style>
+  .logo-loop-container {
+    width: 100%;
+    overflow: hidden;
+    padding: 2.5rem 0;
+    position: relative;
+    mask-image: linear-gradient(90deg, transparent, white 15%, white 85%, transparent);
+  }
+
+  .logo-track {
+    display: flex;
+    gap: 3.5rem;
+    width: max-content;
+    animation: marquee-scroll 45s linear infinite;
+  }
+
+  @keyframes marquee-scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .logo-loop-container:hover .logo-track {
+    animation-play-state: paused;
+  }
+
+  .logo-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    cursor: pointer;
+  }
+
+  .icon-box {
+    width: 68px;
+    height: 68px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: all 0.4s ease;
+    padding: 16px;
+  }
+
+  .icon-box img {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+    position: absolute;
+    transition: all 0.4s ease;
+  }
+
+  .color-logo {
+    opacity: 0;
+    transform: scale(0.8);
+    filter: drop-shadow(0 0 10px var(--brand-color));
+  }
+
+  .logo-item:hover .icon-box {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--brand-color);
+    transform: translateY(-8px) scale(1.1);
+    box-shadow: 0 15px 30px -10px rgba(0,0,0,0.5), 0 0 20px -5px var(--brand-color);
+  }
+
+  .logo-item:hover .base-logo {
+    opacity: 0;
+    transform: scale(1.2);
+  }
+
+  .logo-item:hover .color-logo {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .logo-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    opacity: 0.5;
+    transition: all 0.3s ease;
+  }
+
+  .logo-item:hover .logo-label {
+    opacity: 1;
+    color: white;
+    transform: translateY(-4px);
+  }
+</style>

@@ -1,0 +1,209 @@
+---
+---
+<header id="navbar">
+  <nav class="nav-container">
+    <a href="#hero" class="nav-logo">
+      <span class="logo-bracket">&lt;</span>Dev<span class="logo-slash">/</span><span class="logo-bracket">&gt;</span>
+    </a>
+
+    <button class="hamburger" id="hamburger-btn" aria-label="Toggle menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#sobre-mi" class="nav-link">Sobre mí</a></li>
+      <li><a href="#habilidades" class="nav-link">Habilidades</a></li>
+      <li><a href="#proyectos" class="nav-link">Proyectos</a></li>
+      <li><a href="#contacto" class="nav-link">Contacto</a></li>
+      <li>
+        <a href="#contacto" class="nav-cta" id="nav-hire-btn">Contrátame</a>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+<style>
+  #navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 0;
+    transition: var(--transition);
+  }
+
+  #navbar.scrolled {
+    background: rgba(2, 6, 23, 0.3);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+  }
+
+  .nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1.2rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--cyan);
+    letter-spacing: -0.02em;
+    transition: var(--transition);
+  }
+
+  .nav-logo:hover {
+    text-shadow: 0 0 20px var(--cyan);
+  }
+
+  .logo-bracket { color: rgba(255,255,255,0.6); }
+  .logo-slash { color: var(--cyan); }
+
+  .nav-links {
+    display: flex;
+    list-style: none;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .nav-link {
+    padding: 0.5rem 1rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    border-radius: var(--radius-sm);
+    transition: var(--transition);
+    position: relative;
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background: var(--cyan);
+    border-radius: 1px;
+    transition: width 0.3s ease;
+  }
+
+  .nav-link:hover {
+    color: var(--text-primary);
+  }
+
+  .nav-link:hover::after {
+    width: 60%;
+  }
+
+  .nav-cta {
+    padding: 0.6rem 1.4rem;
+    background: linear-gradient(135deg, var(--cyan) 0%, #0099ff 100%);
+    color: #020617 !important;
+    font-weight: 700;
+    border-radius: var(--radius-sm);
+    transition: var(--transition);
+    box-shadow: 0 0 20px var(--cyan-glow);
+    font-size: 0.9rem;
+    letter-spacing: 0.02em;
+  }
+
+  .nav-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 30px var(--cyan-glow), 0 8px 20px rgba(0,0,0,0.3);
+  }
+
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    z-index: 1001;
+  }
+
+  .hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--text-primary);
+    border-radius: 2px;
+    transition: var(--transition);
+  }
+
+  .hamburger.active span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .hamburger.active span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburger.active span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  @media (max-width: 768px) {
+    .hamburger {
+      display: flex;
+    }
+
+    .nav-links {
+      position: fixed;
+      inset: 0;
+      flex-direction: column;
+      justify-content: center;
+      background: rgba(2, 6, 23, 0.98);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      gap: 1.5rem;
+      font-size: 1.2rem;
+      transform: translateX(100%);
+      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .nav-links.open {
+      transform: translateX(0);
+    }
+
+    .nav-link {
+      font-size: 1.2rem;
+    }
+  }
+</style>
+
+<script>
+  const navbar = document.getElementById('navbar')!;
+  const hamburger = document.getElementById('hamburger-btn')!;
+  const navLinks = document.getElementById('nav-links')!;
+
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  hamburger.addEventListener('click', () => {
+    const isOpen = navLinks.classList.toggle('open');
+    hamburger.classList.toggle('active', isOpen);
+    hamburger.setAttribute('aria-expanded', String(isOpen));
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      hamburger.classList.remove('active');
+      hamburger.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    });
+  });
+</script>

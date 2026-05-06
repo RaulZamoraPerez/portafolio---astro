@@ -1,0 +1,302 @@
+---
+import Folder from './Folder.astro';
+
+const awards = [
+  {
+    title: "Prácticas Profesionales",
+    subtitle: "Digyto Solutions S.A. de C.V.",
+    description: "Desempeño sobresaliente liderando el desarrollo de arquitectura SaaS multi-tenant con .NET 8 y servicios AWS/SAT.",
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>`,
+    year: "2026",
+    color: "#00e676"
+  },
+  {
+    title: "Premio Estatal de la Juventud",
+    subtitle: "Vicente Suárez 2025",
+    description: "Postulado Destacado por la Secretaría de Deporte y Juventud de Puebla, reconociendo el impacto tecnológico y social.",
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2z"/></svg>`,
+    year: "2025",
+    color: "#FFD700"
+  },
+  {
+    title: "Emprendimiento Juvenil",
+    subtitle: "Fundación Nemi A.C.",
+    description: "Participación destacada en el desarrollo de proyectos con enfoque social y emprendedor.",
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><path d="m3 21 1.9-1.9a4.4 4.4 0 0 0 0-6.2l-1.9-1.9 11.3-4.8 4.8 11.3Z"/><path d="m9 15 3-3"/><path d="M17 7l4-4"/><path d="m14 9 5.8 5.8"/><path d="m9 14-5.8-5.8"/><path d="m15 10-3-3"/></svg>`,
+    year: "2025",
+    color: "#00D4FF"
+  },
+  {
+    title: "Representante Nacional en Mérida",
+    subtitle: "Top 5 Nacional",
+    description: "Sede: Mérida, Yucatán. Seleccionado entre los mejores a nivel nacional, logrando posicionarme en el TOP 5 de la competencia.",
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>`,
+    year: "2022",
+    color: "#C0C0C0"
+  }
+];
+---
+
+<section id="reconocimientos">
+  <div class="section-container">
+    <div class="section-label">
+      <span class="label-line"></span>
+      <span>Logros & Premios</span>
+      <span class="label-line"></span>
+    </div>
+
+    <h2 class="section-title">
+      Reconocimientos <span class="highlight-text">& Trayectoria</span>
+    </h2>
+
+    <div class="awards-layout">
+      <!-- Awards List as a balanced grid -->
+      <div class="awards-grid">
+        {awards.map((award) => (
+          <div class="award-card" style={`--border-color: ${award.color}`}>
+            <div class="award-year-badge">{award.year}</div>
+            <div class="award-header">
+              <div class="award-icon-box" set:html={award.icon}></div>
+              <div class="award-info">
+                <h3>{award.title}</h3>
+                <p>{award.subtitle}</p>
+              </div>
+            </div>
+            <p class="award-body-text">{award.description}</p>
+          </div>
+        ))}
+      </div>
+
+      <!-- Decorative Folder Visual -->
+      <div class="awards-decor">
+        <Folder size={1.2} color="var(--gradient-mid)" />
+      </div>
+    </div>
+
+    <div class="awards-action">
+      <a href="/reconocimientos" class="btn-awards">
+        Explorar todos los premios
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  #reconocimientos {
+    padding: 8rem 2rem;
+    position: relative;
+    background: rgba(0,0,0,0.2);
+  }
+
+  .awards-action {
+    margin-top: 4rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  .btn-awards {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 2.5rem;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 100px;
+    color: var(--text-primary);
+    text-decoration: none;
+    font-weight: 700;
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+    backdrop-filter: blur(10px);
+  }
+
+  .btn-awards:hover {
+    background: var(--cyan);
+    color: #020617;
+    border-color: var(--cyan);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 212, 255, 0.2);
+  }
+
+  .btn-awards svg {
+    transition: transform 0.3s;
+  }
+
+  .btn-awards:hover svg {
+    transform: translateX(5px);
+  }
+
+  .section-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 4rem;
+    color: var(--text-primary);
+  }
+
+  .highlight-text {
+    background: linear-gradient(90deg, var(--cyan), #0099ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    justify-content: center;
+  }
+
+  .label-line {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+    width: 60px;
+  }
+
+  .awards-layout {
+    position: relative;
+    z-index: 1;
+  }
+
+  .awards-decor {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.05;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .awards-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .awards-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+
+  .award-card {
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    padding: 2rem;
+    backdrop-filter: blur(20px);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+
+  .award-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top right, var(--border-color), transparent 60%);
+    opacity: 0.1;
+    transition: opacity 0.4s ease;
+  }
+
+  .award-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    border-color: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.07);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  }
+
+  .award-card:hover::before {
+    opacity: 0.2;
+  }
+
+  .award-year-badge {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    padding: 0.3rem 0.8rem;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 100px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: var(--cyan);
+    font-family: var(--font-code);
+  }
+
+  .award-header {
+    display: flex;
+    gap: 1.2rem;
+    align-items: center;
+  }
+
+  .award-icon-box {
+    width: 50px;
+    height: 50px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: #fff;
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+  }
+
+  .award-card:hover .award-icon-box {
+    transform: rotate(-5deg) scale(1.1);
+    background: var(--border-color);
+    color: #000;
+  }
+
+  .award-info h3 {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 0.25rem;
+    line-height: 1.2;
+  }
+
+  .award-info p {
+    font-size: 0.85rem;
+    color: var(--cyan);
+    font-weight: 700;
+    opacity: 0.8;
+  }
+
+  .award-body-text {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  @media (max-width: 900px) {
+    .awards-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .awards-decor {
+      display: none;
+    }
+  }
+</style>

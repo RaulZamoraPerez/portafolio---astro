@@ -1,0 +1,106 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+}
+const { title = "Raul Zamora · Full Stack Developer", description = "Portafolio de Raul Emmanuel Zamora Perez — Ing. en Desarrollo y Gestión de Software. Especialista en .NET 8, Angular, React, Node.js y arquitecturas limpias." } = Astro.props;
+---
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="author" content="Dev Portfolio" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  :root {
+    --gradient-start: #0f172a;
+    --gradient-mid: #1e3a8f;
+    --gradient-end: #3b82f6;
+    --bg-gradient: linear-gradient(90deg, #0f172a 0%, #1e3a8f 50%, #3b82f6 100%);
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.12);
+    --glass-hover: rgba(255, 255, 255, 0.10);
+    --text-primary: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.75);
+    --text-muted: rgba(255, 255, 255, 0.45);
+    --cyan: #00d4ff;
+    --cyan-glow: rgba(0, 212, 255, 0.3);
+    --purple: #7c3aed;
+    --font-main: 'Outfit', sans-serif;
+    --font-code: 'Fira Code', monospace;
+    --radius-sm: 8px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+    --radius-xl: 32px;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+  }
+
+  body {
+    font-family: var(--font-main);
+    background: #0f172a;
+    background: var(--bg-gradient);
+    background-attachment: fixed;
+    color: var(--text-primary);
+    min-height: 100vh;
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+
+  ::selection {
+    background: var(--cyan);
+    color: #091279;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: rgba(9, 18, 121, 0.5);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--cyan);
+    border-radius: 3px;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+</style>

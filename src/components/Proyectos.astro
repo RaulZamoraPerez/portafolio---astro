@@ -1,0 +1,723 @@
+---
+const projects = [
+  {
+    id: "proj-digyto",
+    title: "SaaS Contabilidad Fiscal — Digyto",
+    description: "Lideré la arquitectura completa de una plataforma SaaS multi-tenant a gran escala. Implementé lógica distribuida con .NET 8 (Clean Architecture), automatización de procesos SAT, procesamiento en segundo plano con Hangfire e integración avanzada de AWS S3.",
+    tags: [
+      { name: ".NET 8", slug: "dotnet" },
+      { name: "Angular 18", slug: "angular" },
+      { name: "SAT API", slug: "postgresql" },
+      { name: "AWS S3", slug: "amazonaws" },
+      { name: "Hangfire", slug: "dotnet" }
+    ],
+    badge: "Producción",
+    badgeColor: "#00e676",
+    github: "/reconocimientos/certifcados/Raul Emmanuel Zamora Pérez-1.pdf",
+    featured: true,
+    gradient: "rgba(81,43,212,0.15)",
+  },
+  {
+    id: "proj-mailcat",
+    title: "MailCat — Email Linter",
+    description: "Herramienta profesional para desarrolladores. Permite previsualizar y depurar correos electrónicos en tiempo real directamente desde el editor.",
+    tags: [
+      { name: "TypeScript", slug: "typescript" },
+      { name: "VS Code API", slug: "visualstudiocode" },
+      { name: "Node.js", slug: "nodedotjs" }
+    ],
+    badge: "Próximamente en VS Code Producción",
+    badgeColor: "#a78bfa",
+    github: "https://github.com/RaulZamoraPerez/mail-cat-vs-code",
+    featured: true,
+    gradient: "rgba(139,92,246,0.15)",
+    floatingIcon: "/recursos/logoextension.png"
+  },
+  {
+    id: "proj-game",
+    title: "Juego Ninja — Plataformas 2D",
+    description: "Emocionante juego de plataformas multijugador local desarrollado con Phaser 3. Controla dos ninjas con ataques épicos y mecánicas de combate fluidas.",
+    tags: [
+      { name: "Phaser 3", slug: "javascript" },
+      { name: "Express.js", slug: "express" },
+      { name: "JavaScript ES6", slug: "javascript" }
+    ],
+    badge: "Game Dev",
+    badgeColor: "#ff9800",
+    github: "https://github.com/RaulZamoraPerez/juego-UTTECAM",
+    featured: false,
+    gradient: "rgba(255,152,0,0.1)",
+  },
+  {
+    id: "proj-kiosko",
+    title: "Quiosco App — Food Delivery",
+    description: "Sistema completo de pedidos con panel administrativo en tiempo real. Implementa Zustand para estados complejos y SWR para sincronización de datos.",
+    tags: [
+      { name: "Next.js", slug: "nextdotjs" },
+      { name: "Zustand", slug: "react" },
+      { name: "Prisma", slug: "prisma" },
+      { name: "PostgreSQL", slug: "postgresql" }
+    ],
+    badge: "Full Stack",
+    badgeColor: "#00e676",
+    github: "https://github.com/RaulZamoraPerez/Quiosco-Comida-NEXTjs",
+    featured: true,
+    gradient: "rgba(0,212,255,0.1)",
+  },
+  {
+    id: "proj-teslo",
+    title: "Teslo Shop — Premium E-commerce",
+    description: "Tienda online de alto rendimiento con gestión de inventario, pasarela de pagos y panel de control para administradores.",
+    tags: [
+      { name: "Next.js", slug: "nextdotjs" },
+      { name: "TypeScript", slug: "typescript" },
+      { name: "Docker", slug: "docker" },
+      { name: "PostgreSQL", slug: "postgresql" }
+    ],
+    badge: "Full Stack",
+    badgeColor: "#00d4ff",
+    github: "https://github.com/RaulZamoraPerez/teslo-shop",
+    featured: true,
+    gradient: "rgba(0,212,255,0.15)",
+  },
+  {
+    id: "proj-uttecam",
+    title: "Portal Institucional UTTECAM",
+    description: "Plataforma académica centralizada para miles de usuarios. Digitalización de +20 módulos críticos con arquitectura modular y optimización SEO.",
+    tags: [
+      { name: "React", slug: "react" },
+      { name: "Next.js 15", slug: "nextdotjs" },
+      { name: "TypeScript", slug: "typescript" },
+      { name: "Tailwind", slug: "tailwindcss" }
+    ],
+    badge: "Full Stack",
+    badgeColor: "#00e676",
+    github: "https://github.com/RaulZamoraPerez/UTTECAM",
+    featured: true,
+    gradient: "rgba(0,212,255,0.12)",
+  },
+  {
+    id: "proj-game",
+    title: "Galaxy Invaders — Space Shooter",
+    description: "Videojuego de disparos arcade desarrollado en Unity. Implementé patrones de diseño como Object Pooling para optimización de memoria y un sistema de oleadas controlado por IA.",
+    tags: [
+      { name: "C#", slug: "csharp" },
+      { name: "Unity", slug: "unity" },
+      { name: "Game Design", slug: "unity" }
+    ],
+    badge: "Game Dev",
+    badgeColor: "#ff9800",
+    github: "https://github.com/RaulZamoraPerez",
+    featured: false,
+    gradient: "rgba(255,152,0,0.1)",
+  },
+  {
+    id: "proj-mern",
+    title: "MERN — Gestor de Proyectos",
+    description: "Administrador de tareas profesional con autenticación robusta, gestión de equipos y persistencia en MongoDB con Mongoose.",
+    tags: [
+      { name: "MongoDB", slug: "mongodb" },
+      { name: "Express", slug: "express" },
+      { name: "React", slug: "react" },
+      { name: "Redux", slug: "redux" }
+    ],
+    badge: "Full Stack",
+    badgeColor: "#00d4ff",
+    github: "https://github.com/RaulZamoraPerez/Mern_Backend",
+    featured: false,
+    gradient: "rgba(71,162,72,0.1)",
+  },
+  {
+    id: "proj-devjobs",
+    title: "DevJobs — Bolsa de Empleo",
+    description: "Plataforma de reclutamiento con filtros de búsqueda, perfiles de empresa y sistema de postulaciones asíncronas.",
+    tags: [
+      { name: "PHP", slug: "php" },
+      { name: "Laravel", slug: "laravel" },
+      { name: "Tailwind", slug: "tailwindcss" },
+      { name: "MySQL", slug: "mysql" }
+    ],
+    badge: "Full Stack",
+    badgeColor: "#00d4ff",
+    github: "https://github.com/RaulZamoraPerez/devjobsL",
+    featured: false,
+    gradient: "rgba(255,45,32,0.1)",
+  },
+  {
+    id: "proj-bebidas",
+    title: "Buscador de Bebidas — API Recipes",
+    description: "Aplicación interactiva de búsqueda de recetas con filtros por categoría e ingredientes, consumiendo APIs externas de alto volumen.",
+    tags: [
+      { name: "React", slug: "react" },
+      { name: "Zustand", slug: "react" },
+      { name: "Tailwind", slug: "tailwindcss" }
+    ],
+    badge: "Frontend",
+    badgeColor: "#f59e0b",
+    github: "https://github.com/RaulZamoraPerez/citas_React", // Using a fallback since exact link not in list or similar
+    featured: false,
+    gradient: "rgba(245,158,11,0.1)",
+  },
+  {
+    id: "proj-realestate",
+    title: "Bienes Raíces — Admin Panel",
+    description: "Plataforma de gestión inmobiliaria con geolocalización, carga de imágenes en la nube y filtros de búsqueda avanzados.",
+    tags: [
+      { name: "Node.js", slug: "nodedotjs" },
+      { name: "Express", slug: "express" },
+      { name: "Sequelize", slug: "sequelize" },
+      { name: "MySQL", slug: "mysql" }
+    ],
+    badge: "Backend",
+    badgeColor: "#00d4ff",
+    github: "https://github.com/RaulZamoraPerez/bienes_raices_node_express_tailwindcss",
+    featured: false,
+    gradient: "rgba(0,212,255,0.1)",
+  },
+  {
+    id: "proj-laravel",
+    title: "Devstagram — Social App",
+    description: "Red social completa construida con PHP/Laravel. Sistema de seguidores, likes y notificaciones asíncronas con base de datos MySQL.",
+    tags: [
+      { name: "Laravel", slug: "laravel" },
+      { name: "PHP", slug: "php" },
+      { name: "Tailwind", slug: "tailwindcss" }
+    ],
+    badge: "Full Stack",
+    badgeColor: "#00d4ff",
+    github: "https://github.com/RaulZamoraPerez/Devstagram_laravel",
+    featured: false,
+    gradient: "rgba(236,72,153,0.1)",
+  },
+  {
+    id: "proj-movies",
+    title: "MoviesApp — React Native",
+    description: "Experiencia móvil fluida para cinéfilos. Integración de APIs externas, modo oscuro nativo y navegación optimizada con Expo.",
+    tags: [
+      { name: "React Native", slug: "react" },
+      { name: "Expo", slug: "expo" },
+      { name: "TypeScript", slug: "typescript" }
+    ],
+    badge: "Mobile",
+    badgeColor: "#61dafb",
+    github: "https://github.com/RaulZamoraPerez/MoviesApp",
+    featured: false,
+    gradient: "rgba(97,218,251,0.1)",
+  },
+  {
+    id: "proj-digyto",
+    title: "SaaS E-commerce (API C#)",
+    description: "Backend empresarial para ventas masivas. Implementa patrones de diseño, Entity Framework Core y arquitectura distribuida en .NET 8.",
+    tags: [
+      { name: ".NET 8", slug: "dotnet" },
+      { name: "C#", slug: "csharp" },
+      { name: "EF Core", slug: "dotnet" },
+      { name: "SQL Server", slug: "microsoftsqlserver" }
+    ],
+    badge: "Backend",
+    badgeColor: "#00d4ff",
+    github: "https://github.com/RaulZamoraPerez/rest--ful-api-net8",
+    featured: false,
+    gradient: "rgba(81,43,212,0.15)",
+  },
+  {
+    id: "proj-ia",
+    title: "IA — Chatbot Multi-LLM",
+    description: "Chatbot inteligente que orquesta múltiples modelos de IA. Interfaz reactiva y limpia con consumo de APIs de última generación.",
+    tags: [
+      { name: "JS Vanilla", slug: "javascript" },
+      { name: "AI", slug: "google-gemini" },
+      { name: "OpenRouter", slug: "openai" }
+    ],
+    badge: "IA",
+    badgeColor: "#f59e0b",
+    github: "https://github.com/RaulZamoraPerez/IA-PARA-TODOS",
+    featured: false,
+    gradient: "rgba(245,158,11,0.1)",
+  },
+  {
+    id: "proj-english",
+    title: "English Academy — E-learning Platform",
+    description: "Plataforma integral para el aprendizaje del idioma inglés. Implementé pasarela de pagos con Stripe, gestión de cursos dinámica y generación automática de certificados con validación QR única.",
+    tags: [
+      { name: "NestJS", slug: "nestjs" },
+      { name: "PostgreSQL", slug: "postgresql" },
+      { name: "React", slug: "react" },
+      { name: "Stripe", slug: "stripe" },
+      { name: "AWS", slug: "amazonaws" }
+    ],
+    badge: "Full Stack",
+    badgeColor: "#E0234E",
+    github: "https://github.com/RaulZamoraPerez/INGLES_TCEI.git",
+    featured: false,
+    gradient: "rgba(224,35,78,0.15)",
+  },
+];
+---
+
+<section id="proyectos">
+  <div class="section-container">
+    <div class="section-label">
+      <span class="label-line"></span>
+      <span>Proyectos</span>
+      <span class="label-line"></span>
+    </div>
+
+    <h2 class="section-title">
+      Mi <span class="highlight-text">Trabajo Real</span>
+    </h2>
+    <p class="section-subtitle">
+      Sistemas en producción y proyectos que demuestran mi experiencia full stack
+    </p>
+
+    <!-- Filter tabs -->
+    <div class="filter-tabs" role="tablist" aria-label="Filtrar proyectos">
+      <button class="filter-tab active" id="filter-all" data-filter="all" role="tab" aria-selected="true">Todos</button>
+      <button class="filter-tab" id="filter-fullstack" data-filter="Full Stack" role="tab" aria-selected="false">Full Stack</button>
+      <button class="filter-tab" id="filter-backend" data-filter="Backend" role="tab" aria-selected="false">Backend</button>
+      <button class="filter-tab" id="filter-mobile" data-filter="Mobile" role="tab" aria-selected="false">Mobile</button>
+      <button class="filter-tab" id="filter-ia" data-filter="IA" role="tab" aria-selected="false">IA</button>
+      <button class="filter-tab" id="filter-tools" data-filter="Herramienta" role="tab" aria-selected="false">Herramientas</button>
+    </div>
+
+    <!-- Projects grid -->
+    <div class="projects-grid" id="projects-grid">
+      {projects.map((project) => (
+        <article
+          class="project-card"
+          id={project.id}
+          data-badge={project.badge}
+          data-featured={project.featured}
+          style={`--card-glow: ${project.gradient};`}
+        >
+          <div class="card-header">
+            {project.floatingIcon && (
+              <div class="floating-icon-container">
+                <img src={project.floatingIcon} alt="" class="floating-icon" />
+              </div>
+            )}
+            <div class="header-top">
+              <span class="badge" style={`color: ${project.badgeColor}; background: ${project.badgeColor}15; border-color: ${project.badgeColor}33`}>
+                {project.badge}
+              </span>
+              {project.featured && <span class="status-dot"><span class="dot"></span> Producción</span>}
+            </div>
+            <h3 class="project-title">{project.title}</h3>
+          </div>
+
+          <div class="card-body">
+            <p class="project-desc">{project.description}</p>
+            
+            <div class="tech-stack">
+              {project.tags.map(tag => (
+                <div class="tech-item" title={tag.name}>
+                  <img src={`https://cdn.simpleicons.org/${tag.slug}/white`} alt="" width="14" height="14" />
+                  <span>{tag.name}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div class="card-footer">
+            <a href={project.github} class="project-link" target="_blank">
+              <span>{project.id === 'proj-digyto' ? 'Ver Reconocimiento' : 'Explorar Código'}</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+            </a>
+          </div>
+        </article>
+      ))}
+    </div>
+    <div class="view-more-container">
+      <a href="https://github.com/RaulZamoraPerez" class="view-more-btn" target="_blank">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+        Ver todos los repositorios
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  #proyectos {
+    padding: 8rem 2rem;
+    position: relative;
+    background: radial-gradient(circle at 0% 100%, rgba(0, 212, 255, 0.05) 0%, transparent 50%);
+  }
+
+  .section-title {
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    color: #fff;
+    letter-spacing: -0.02em;
+  }
+
+  .highlight-text {
+    background: linear-gradient(90deg, var(--cyan), #0099ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .section-subtitle {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    text-align: center;
+    margin-bottom: 4rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    opacity: 0.8;
+  }
+
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    justify-content: center;
+  }
+
+  .label-line {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+    width: 40px;
+  }
+
+  .filter-tabs {
+    display: flex;
+    gap: 0.8rem;
+    justify-content: center;
+    margin-bottom: 4rem;
+    flex-wrap: wrap;
+  }
+
+  .filter-tab {
+    padding: 0.6rem 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 100px;
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .filter-tab:hover,
+  .filter-tab.active {
+    background: rgba(0, 212, 255, 0.1);
+    border-color: var(--cyan);
+    color: #fff;
+    transform: translateY(-2px);
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .project-card {
+    background: rgba(255, 255, 255, 0.015);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 28px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    position: relative;
+    /* overflow: hidden; REMOVED to allow pop-out */
+  }
+
+  .project-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top right, var(--card-glow), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    z-index: 0;
+    border-radius: 28px;
+  }
+
+  .project-card:hover {
+    transform: translateY(-10px);
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(0, 212, 255, 0.3);
+    box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.6);
+  }
+
+  .project-card:hover::after {
+    opacity: 0.4;
+  }
+
+  .floating-icon-container {
+    position: absolute;
+    top: -85px; /* Popping out from the top */
+    right: -15px;
+    width: 160px;
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 20;
+    pointer-events: none;
+    animation: float-pop 5s ease-in-out infinite;
+  }
+
+  .floating-icon {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 20px 30px rgba(0,0,0,0.5));
+  }
+
+  @keyframes float-pop {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-10px) scale(1.05); }
+  }
+
+  @keyframes float-mini {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-5px) rotate(5deg); }
+  }
+
+  .card-header, .card-body, .card-footer {
+    position: relative;
+    z-index: 1;
+  }
+
+  .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.2rem;
+  }
+
+  .badge {
+    padding: 0.4rem 0.9rem;
+    border-radius: 100px;
+    font-size: 0.6rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border: 1px solid;
+  }
+
+  .status-dot {
+    font-size: 0.75rem;
+    color: #00e676;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0.9;
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+    background: #00e676;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #00e676;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.4); opacity: 0.5; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+
+  .project-title {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+
+  .project-desc {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+
+  .tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  .tech-item {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.8rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 10px;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    transition: all 0.3s ease;
+  }
+
+  .project-card:hover .tech-item {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.15);
+    color: #fff;
+  }
+
+  .tech-item img {
+    opacity: 0.8;
+  }
+
+  .card-footer {
+    margin-top: auto;
+    padding-top: 1rem;
+  }
+
+  .project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 0.9rem;
+    font-weight: 800;
+    color: var(--cyan);
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .project-link svg {
+    transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .project-link:hover {
+    color: #fff;
+    letter-spacing: 0.02em;
+  }
+
+  .project-link:hover svg {
+    transform: translateX(6px);
+  }
+
+  .view-more-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 5rem;
+  }
+
+  .view-more-btn {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.2rem 2.5rem;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 100px;
+    color: #fff;
+    font-weight: 800;
+    text-decoration: none;
+    transition: all 0.4s ease;
+    backdrop-filter: blur(10px);
+    font-size: 0.95rem;
+  }
+
+  .view-more-btn:hover {
+    background: var(--cyan);
+    color: #020617;
+    border-color: transparent;
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 212, 255, 0.3);
+  }
+
+  .view-more-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 4rem;
+  }
+
+  .view-more-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 1rem 2rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 100px;
+    color: var(--text-primary);
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+  }
+
+  .view-more-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--cyan);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4), 0 0 15px rgba(0, 212, 255, 0.2);
+  }
+
+  @media (max-width: 1000px) {
+    .projects-grid { 
+      grid-template-columns: repeat(2, 1fr); 
+      gap: 1.5rem;
+    }
+  }
+
+  @media (max-width: 650px) {
+    .projects-grid { 
+      grid-template-columns: 1fr; 
+      gap: 1.2rem;
+    }
+    
+    .project-card {
+      padding: 1.5rem;
+    }
+    
+    .card-title {
+      font-size: 1.3rem;
+    }
+    
+    .project-tags {
+      gap: 0.4rem;
+    }
+  }
+</style>
+
+<script>
+  const tabs = document.querySelectorAll('.filter-tab');
+  const cards = document.querySelectorAll('.project-card') as NodeListOf<HTMLElement>;
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
+      tab.classList.add('active');
+      tab.setAttribute('aria-selected', 'true');
+
+      const filter = (tab as HTMLElement).dataset.filter!;
+
+      cards.forEach(card => {
+        const badge = card.dataset.badge!;
+        const featured = card.dataset.featured === 'true';
+
+        const show =
+          filter === 'all' ||
+          (filter === 'featured' && featured) ||
+          badge === filter;
+
+        card.classList.toggle('hidden', !show);
+      });
+    });
+  });
+</script>

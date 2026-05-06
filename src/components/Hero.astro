@@ -1,0 +1,534 @@
+---
+import Terminal from './Terminal.astro';
+---
+<section id="hero">
+  <!-- Animated particles background -->
+  <div class="particles" id="particles-hero" aria-hidden="true">
+    {Array.from({ length: 20 }).map((_, i) => (
+      <span class="particle" style={`--delay: ${i * 0.3}s; --x: ${Math.random() * 100}%; --size: ${Math.random() * 4 + 2}px; --duration: ${Math.random() * 10 + 8}s`}></span>
+    ))}
+  </div>
+
+  <!-- Glowing orbs -->
+  <div class="orb orb-1" aria-hidden="true"></div>
+  <div class="orb orb-2" aria-hidden="true"></div>
+  <div class="orb orb-3" aria-hidden="true"></div>
+
+  <div class="hero-container">
+    <div class="hero-left">
+      <!-- Badge -->
+      <div class="hero-badge" id="hero-available-badge">
+        <span class="badge-dot"></span>
+        Disponible para proyectos · Titulación en proceso 2026
+      </div>
+
+      <!-- Main Heading -->
+      <h1 class="hero-title">
+        Hola, soy
+        <span class="hero-name-wrap">
+          <span class="hero-name" id="hero-name">Raul Zamora</span>
+        </span>
+        <span class="hero-subtitle-line">Ing. en Desarrollo y Gestión de Software</span>
+      </h1>
+
+      <!-- Typewriter -->
+      <p class="hero-typewriter">
+        <span class="typewriter-prefix">$ </span>
+        <span class="typewriter-text" id="typewriter">Full Stack Developer</span>
+        <span class="typewriter-cursor">|</span>
+      </p>
+
+      <!-- Description -->
+      <p class="hero-desc">
+        Con experiencia práctica liderando sistemas reales en producción. Apasionado 
+        por soluciones de alto impacto con arquitecturas limpias y escalables.
+      </p>
+
+      <!-- CTA Buttons -->
+      <div class="hero-actions">
+        <a href="#proyectos" class="btn-primary" id="hero-projects-btn">Ver Proyectos</a>
+        <a href="#contacto" class="btn-secondary" id="hero-contact-btn">Contáctame</a>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="hero-visual">
+        <Terminal />
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <a href="#sobre-mi" class="scroll-indicator" id="scroll-down-btn" aria-label="Scroll down">
+    <span class="scroll-text">Scroll</span>
+    <div class="scroll-mouse">
+      <div class="scroll-wheel"></div>
+    </div>
+  </a>
+</section>
+
+<style>
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8rem 2rem 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    gap: 4rem;
+  }
+
+  /* Particles */
+  .particles {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .particle {
+    position: absolute;
+    left: var(--x);
+    bottom: -10px;
+    width: var(--size);
+    height: var(--size);
+    background: var(--cyan);
+    border-radius: 50%;
+    opacity: 0;
+    animation: float-up var(--duration) var(--delay) infinite ease-in;
+  }
+
+  @keyframes float-up {
+    0% { opacity: 0; transform: translateY(0) scale(1); }
+    10% { opacity: 0.6; }
+    90% { opacity: 0.3; }
+    100% { opacity: 0; transform: translateY(-100vh) scale(0.5); }
+  }
+
+  /* Orbs */
+  .orb {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .orb-1 {
+    width: 400px;
+    height: 400px;
+    background: rgba(0, 212, 255, 0.15);
+    top: -100px;
+    right: 10%;
+    animation: orb-drift 15s ease-in-out infinite alternate;
+  }
+
+  .orb-2 {
+    width: 300px;
+    height: 300px;
+    background: rgba(124, 58, 237, 0.2);
+    bottom: 10%;
+    left: 5%;
+    animation: orb-drift 12s ease-in-out infinite alternate-reverse;
+  }
+
+  .orb-3 {
+    width: 200px;
+    height: 200px;
+    background: rgba(0, 212, 255, 0.1);
+    top: 50%;
+    left: 40%;
+    animation: orb-drift 18s ease-in-out infinite alternate;
+  }
+
+  @keyframes orb-drift {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(40px, 30px) scale(1.1); }
+  }
+
+  /* Hero Layout */
+  .hero-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 4rem;
+    z-index: 1;
+    position: relative;
+  }
+
+  .hero-left {
+    flex: 1;
+    max-width: 600px;
+  }
+
+  .hero-right {
+    flex: 0 0 auto;
+    width: 440px;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 1rem;
+    background: rgba(0, 212, 255, 0.1);
+    border: 1px solid rgba(0, 212, 255, 0.3);
+    border-radius: 100px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--cyan);
+    margin-bottom: 1.5rem;
+    animation: fade-in 0.6s ease forwards;
+  }
+
+  .badge-dot {
+    width: 8px;
+    height: 8px;
+    background: #00e676;
+    border-radius: 50%;
+    animation: pulse-dot 2s ease infinite;
+    box-shadow: 0 0 0 0 rgba(0, 230, 118, 0.5);
+  }
+
+  @keyframes pulse-dot {
+    0% { box-shadow: 0 0 0 0 rgba(0, 230, 118, 0.5); }
+    70% { box-shadow: 0 0 0 8px rgba(0, 230, 118, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(0, 230, 118, 0); }
+  }
+
+  .hero-title {
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+    animation: slide-up 0.8s 0.2s ease both;
+  }
+
+  .hero-name-wrap {
+    display: block;
+    position: relative;
+  }
+
+  .hero-name {
+    background: linear-gradient(90deg, var(--cyan) 0%, #fff 50%, var(--cyan) 100%);
+    background-size: 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer 3s linear infinite;
+  }
+
+  @keyframes shimmer {
+    0% { background-position: 200% center; }
+    100% { background-position: -200% center; }
+  }
+
+  .hero-subtitle-line {
+    display: block;
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    font-weight: 400;
+    color: var(--text-secondary);
+    margin-top: 0.25rem;
+  }
+
+  .hero-typewriter {
+    font-family: var(--font-code);
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: var(--cyan);
+    margin-bottom: 1.5rem;
+    animation: slide-up 0.8s 0.4s ease both;
+  }
+
+  .typewriter-prefix { color: rgba(255,255,255,0.4); }
+
+  .typewriter-cursor {
+    animation: blink 1s step-end infinite;
+    color: var(--cyan);
+  }
+
+  @keyframes blink {
+    50% { opacity: 0; }
+  }
+
+  .hero-desc {
+    font-size: clamp(0.95rem, 2vw, 1.05rem);
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 2.5rem;
+    max-width: 520px;
+    animation: slide-up 0.8s 0.5s ease both;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 2.5rem;
+    animation: slide-up 0.8s 0.6s ease both;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.9rem 2rem;
+    background: linear-gradient(135deg, var(--cyan) 0%, #0099ff 100%);
+    color: #091279;
+    font-weight: 700;
+    font-size: 1rem;
+    border-radius: var(--radius-md);
+    transition: var(--transition);
+    box-shadow: 0 0 30px var(--cyan-glow);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 50px var(--cyan-glow), 0 12px 30px rgba(0,0,0,0.4);
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.9rem 2rem;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    color: var(--text-primary);
+    font-weight: 600;
+    font-size: 1rem;
+    border-radius: var(--radius-md);
+    transition: var(--transition);
+    backdrop-filter: blur(10px);
+  }
+
+  .btn-secondary:hover {
+    background: var(--glass-hover);
+    border-color: var(--cyan);
+    transform: translateY(-3px);
+  }
+
+  .hero-socials {
+    display: flex;
+    gap: 1rem;
+    animation: slide-up 0.8s 0.7s ease both;
+  }
+
+  .social-link {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    color: var(--text-secondary);
+    transition: var(--transition);
+    backdrop-filter: blur(10px);
+  }
+
+  .social-link:hover {
+    background: rgba(0, 212, 255, 0.15);
+    border-color: var(--cyan);
+    color: var(--cyan);
+    transform: translateY(-3px);
+    box-shadow: 0 0 20px var(--cyan-glow);
+  }
+
+  /* Hero Visual */
+  .hero-visual {
+    flex: 0 0 auto;
+    position: relative;
+    width: 440px;
+    z-index: 1;
+    animation: fade-in 1s 0.5s ease both;
+    perspective: 1000px;
+  }
+
+  /* Scroll indicator */
+  .scroll-indicator {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    animation: bounce-down 2s ease-in-out infinite;
+  }
+
+  .scroll-mouse {
+    width: 24px;
+    height: 36px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    padding-top: 5px;
+  }
+
+  .scroll-wheel {
+    width: 4px;
+    height: 8px;
+    background: var(--cyan);
+    border-radius: 2px;
+    animation: scroll-wheel 2s ease-in-out infinite;
+  }
+
+  @keyframes scroll-wheel {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(16px); opacity: 0; }
+  }
+
+  @keyframes bounce-down {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(6px); }
+  }
+
+  /* Animations */
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 8rem 2rem 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  @keyframes slide-up {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 1000px) {
+    #hero {
+      padding-top: 7rem;
+    }
+
+    .hero-container {
+      flex-direction: column;
+      text-align: center;
+      gap: 3rem;
+    }
+
+    .hero-left {
+      max-width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .hero-actions { justify-content: center; }
+    .hero-badge { display: inline-flex; }
+
+    .hero-right {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    .hero-visual {
+      width: 100%;
+      max-width: 500px;
+      transform: scale(0.9);
+    }
+
+    .scroll-indicator { display: none; }
+  }
+
+  @media (max-width: 600px) {
+    #hero {
+      padding-top: 6rem;
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+
+    .hero-title {
+      font-size: 2.2rem;
+    }
+
+    .hero-visual {
+      transform: scale(0.85);
+      margin-top: -2rem;
+    }
+
+    .hero-actions {
+      flex-direction: column;
+      width: 100%;
+      gap: 0.8rem;
+    }
+
+    .btn-primary, .btn-secondary {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .hero-visual {
+      transform: scale(0.7);
+      margin-top: -4rem;
+      margin-bottom: -4rem;
+    }
+  }
+</style>
+
+<script>
+  // Typewriter effect
+  const phrases = [
+    "Full Stack Developer",
+    ".NET 8 / Angular Engineer",
+    "React & Next.js Developer",
+    "Node.js / NestJS Backend",
+    "Cloud & Docker Enthusiast",
+    "Clean Architecture Lover",
+  ];
+
+  const el = document.getElementById('typewriter')!;
+  let phraseIdx = 0;
+  let charIdx = 0;
+  let deleting = false;
+
+  function type() {
+    const current = phrases[phraseIdx];
+    if (deleting) {
+      el.textContent = current.substring(0, charIdx--);
+    } else {
+      el.textContent = current.substring(0, charIdx++);
+    }
+
+    if (!deleting && charIdx > current.length) {
+      setTimeout(() => { deleting = true; type(); }, 2000);
+      return;
+    }
+
+    if (deleting && charIdx < 0) {
+      deleting = false;
+      phraseIdx = (phraseIdx + 1) % phrases.length;
+      charIdx = 0;
+      setTimeout(type, 300);
+      return;
+    }
+
+    setTimeout(type, deleting ? 50 : 80);
+  }
+
+  type();
+</script>

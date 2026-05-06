@@ -1,0 +1,29 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Hero from '../components/Hero.astro';
+import SobreMi from '../components/SobreMi.astro';
+import Habilidades from '../components/Habilidades.astro';
+import Proyectos from '../components/Proyectos.astro';
+import Contacto from '../components/Contacto.astro';
+import Reconocimientos from '../components/Reconocimientos.astro';
+---
+
+<Layout>
+  <Navbar />
+  <main>
+    <Hero />
+    <SobreMi />
+    <Habilidades />
+    <Reconocimientos />
+    <Proyectos />
+    <Contacto />
+  </main>
+</Layout>
+
+<style>
+  main {
+    position: relative;
+    z-index: 1;
+  }
+</style>

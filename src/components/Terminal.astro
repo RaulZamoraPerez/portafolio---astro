@@ -1,0 +1,323 @@
+---
+---
+<!--
+  Terminal component animado - inspirado en MagicUI Terminal
+  Simula una terminal real con typing animation y spans animados
+-->
+<div class="terminal-wrapper" id="portfolio-terminal" aria-label="Terminal demo interactiva">
+  <!-- Barra superior de la terminal -->
+  <div class="terminal-bar">
+    <div class="terminal-dots">
+      <span class="dot dot-red"></span>
+      <span class="dot dot-yellow"></span>
+      <span class="dot dot-green"></span>
+    </div>
+    <div class="terminal-title">bash — RaulZamoraPerez</div>
+    <div class="terminal-bar-right">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="14" height="14">
+        <rect x="3" y="3" width="18" height="18" rx="2"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Cuerpo de la terminal -->
+  <div class="terminal-body" id="terminal-body" aria-live="polite">
+    <!-- Las líneas se generan dinámicamente desde JS -->
+  </div>
+</div>
+
+<style>
+  .terminal-wrapper {
+    background: rgba(5, 8, 30, 0.92);
+    border: 1px solid rgba(0, 212, 255, 0.25);
+    border-radius: var(--radius-lg, 16px);
+    overflow: hidden;
+    box-shadow:
+      0 0 0 1px rgba(0, 212, 255, 0.08),
+      0 25px 60px rgba(0, 0, 0, 0.6),
+      0 0 60px rgba(0, 212, 255, 0.07);
+    font-family: 'Fira Code', 'Cascadia Code', 'JetBrains Mono', monospace;
+    font-size: 0.82rem;
+    width: 100%;
+    max-width: 440px;
+    backdrop-filter: blur(20px);
+    animation: terminal-appear 0.8s 0.3s cubic-bezier(0.4, 0, 0.2, 1) both;
+  }
+
+  @keyframes terminal-appear {
+    from { opacity: 0; transform: translateY(20px) scale(0.97); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  /* Barra superior */
+  .terminal-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.7rem 1rem;
+    background: rgba(255, 255, 255, 0.04);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    user-select: none;
+  }
+
+  .terminal-dots {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+  }
+
+  .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: block;
+  }
+
+  .dot-red    { background: #ff5f57; box-shadow: 0 0 6px rgba(255,95,87,0.5); }
+  .dot-yellow { background: #febc2e; box-shadow: 0 0 6px rgba(254,188,46,0.5); }
+  .dot-green  { background: #28c840; box-shadow: 0 0 6px rgba(40,200,64,0.5); }
+
+  .terminal-title {
+    flex: 1;
+    text-align: center;
+    font-size: 0.72rem;
+    color: rgba(255, 255, 255, 0.35);
+    letter-spacing: 0.05em;
+  }
+
+  .terminal-bar-right {
+    color: rgba(255,255,255,0.2);
+    cursor: pointer;
+  }
+
+  /* Cuerpo */
+  .terminal-body {
+    padding: 1.25rem 1.4rem;
+    min-height: 260px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    line-height: 1.65;
+  }
+
+  /* Líneas */
+  .t-line {
+    display: flex;
+    align-items: flex-start;
+    gap: 0;
+    opacity: 0;
+    white-space: pre;
+  }
+
+  .t-line.visible {
+    opacity: 1;
+  }
+
+  /* Prompt */
+  .t-prompt {
+    color: #00d4ff;
+    user-select: none;
+    flex-shrink: 0;
+  }
+
+  .t-prompt-user { color: #28c840; }
+  .t-prompt-at   { color: rgba(255,255,255,0.3); }
+  .t-prompt-dir  { color: #7dd3fc; }
+  .t-prompt-sym  { color: rgba(255,255,255,0.5); }
+
+  /* Texto de comando (typing) */
+  .t-cmd {
+    color: #e2e8f0;
+  }
+
+  /* Cursor parpadeante */
+  .t-cursor {
+    display: inline-block;
+    width: 8px;
+    height: 1em;
+    background: #00d4ff;
+    border-radius: 1px;
+    vertical-align: text-bottom;
+    animation: blink-cursor 1s step-end infinite;
+    margin-left: 1px;
+  }
+
+  @keyframes blink-cursor {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  /* Output spans */
+  .t-output {
+    color: rgba(255, 255, 255, 0.55);
+    padding-left: 0.25rem;
+  }
+
+  .t-output.color-blue   { color: #7dd3fc; }
+  .t-output.color-green  { color: #86efac; }
+  .t-output.color-yellow { color: #fde047; }
+  .t-output.color-red    { color: #fca5a5; }
+  .t-output.color-cyan   { color: #67e8f9; }
+  .t-output.color-purple { color: #c4b5fd; }
+
+  .t-output.color-success {
+    color: #86efac;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .t-output.color-success::before {
+    content: '✓';
+    color: #28c840;
+    font-weight: bold;
+  }
+
+  .t-output.color-error {
+    color: #fca5a5;
+  }
+
+  .t-output.color-error::before {
+    content: '✗ ';
+    color: #ff5f57;
+  }
+
+  /* Scroll animation */
+  .t-line {
+    animation: none;
+  }
+</style>
+
+<script>
+  // ─── Configuration ────────────────────────────────────────────────────────
+  const PROMPT = '<span class="t-prompt"><span class="t-prompt-user">raulzamora</span><span class="t-prompt-at">@</span><span class="t-prompt-dir">portfolio</span><span class="t-prompt-sym"> $ </span></span>';
+
+  interface TerminalLine {
+    type: 'command' | 'output';
+    text: string;
+    color?: string;
+    delay: number;          // ms from previous line
+    typeSpeed?: number;     // ms per character (only for command)
+    pause?: number;         // ms to wait after this line before next
+  }
+
+  const scenarios: TerminalLine[][] = [
+    // Scenario 1: Web Dev
+    [
+      { type: 'command', text: 'npm run dev',                delay: 600,  typeSpeed: 80 },
+      { type: 'output',  text: 'Vite v6.0.0 ready',           delay: 300,  color: 'cyan' },
+      { type: 'output',  text: '➜ Local: http://localhost:5173', delay: 200, color: 'blue' },
+      { type: 'output',  text: 'Build exitoso ✓',              delay: 800,  color: 'success' },
+    ],
+    // Scenario 2: Backend .NET
+    [
+      { type: 'command', text: 'dotnet run',                 delay: 600,  typeSpeed: 80 },
+      { type: 'output',  text: 'Building project...',         delay: 400,  color: 'yellow' },
+      { type: 'output',  text: 'Listening on: https://localhost:5001', delay: 300, color: 'green' },
+      { type: 'output',  text: 'DB Connected ✓',              delay: 500,  color: 'success' },
+    ],
+    // Scenario 3: AI / LLM
+    [
+      { type: 'command', text: 'python ai_agent.py',         delay: 600,  typeSpeed: 80 },
+      { type: 'output',  text: 'Initializing LLM weights...', delay: 400,  color: 'purple' },
+      { type: 'output',  text: 'AI Agent Online 🤖',          delay: 500,  color: 'cyan' },
+      { type: 'output',  text: 'Optimización completa ✓',      delay: 500,  color: 'success' },
+    ],
+    // Scenario 4: Git / Deploy
+    [
+      { type: 'command', text: 'git push production main',   delay: 600,  typeSpeed: 90 },
+      { type: 'output',  text: 'Uploading assets to AWS...',  delay: 400,  color: 'yellow' },
+      { type: 'output',  text: 'Deploy exitoso en Vercel ✓',   delay: 800,  color: 'success' },
+    ]
+  ];
+
+  // ─── Runner ───────────────────────────────────────────────────────────────
+  const body = document.getElementById('terminal-body')!;
+  let cursor: HTMLElement | null = null;
+
+  function sleep(ms: number) {
+    return new Promise<void>(r => setTimeout(r, ms));
+  }
+
+  function createOutputLine(text: string, color = '') {
+    const line = document.createElement('div');
+    line.className = `t-line t-output ${color ? 'color-' + color : ''}`;
+    line.textContent = text;
+    return line;
+  }
+
+  function createCommandLine() {
+    const line = document.createElement('div');
+    line.className = 't-line';
+    line.innerHTML = PROMPT;
+    const cmd = document.createElement('span');
+    cmd.className = 't-cmd';
+    line.appendChild(cmd);
+    return { line, cmd };
+  }
+
+  async function typeLine(el: HTMLElement, text: string, speed = 70) {
+    for (const ch of text) {
+      el.textContent += ch;
+      await sleep(speed + Math.random() * 20 - 10);
+    }
+  }
+
+  async function runTerminal() {
+    let scenarioIndex = 0;
+    
+    while (true) {
+      body.innerHTML = '';
+      const currentScript = scenarios[scenarioIndex];
+      
+      for (const entry of currentScript) {
+        await sleep(entry.delay);
+
+        if (entry.type === 'command') {
+          const { line, cmd } = createCommandLine();
+          cursor = document.createElement('span');
+          cursor.className = 't-cursor';
+          line.appendChild(cursor);
+          line.classList.add('visible');
+          body.appendChild(line);
+          body.scrollTop = body.scrollHeight;
+
+          await sleep(120);
+          await typeLine(cmd, entry.text, entry.typeSpeed ?? 70);
+          cursor.remove();
+
+        } else {
+          const line = createOutputLine(entry.text, entry.color ?? '');
+          line.classList.add('visible');
+          body.appendChild(line);
+          body.scrollTop = body.scrollHeight;
+        }
+      }
+
+      // Final blinking cursor
+      const { line, cmd } = createCommandLine();
+      cursor = document.createElement('span');
+      cursor.className = 't-cursor';
+      line.appendChild(cursor);
+      line.classList.add('visible');
+      body.appendChild(line);
+      body.scrollTop = body.scrollHeight;
+
+      // Cycle through scenarios
+      scenarioIndex = (scenarioIndex + 1) % scenarios.length;
+
+      // Wait before restarting
+      await sleep(5000);
+    }
+  }
+
+  // Start after intersection
+  const observer = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) {
+      observer.disconnect();
+      runTerminal();
+    }
+  }, { threshold: 0.3 });
+
+  observer.observe(document.getElementById('portfolio-terminal')!);
+</script>

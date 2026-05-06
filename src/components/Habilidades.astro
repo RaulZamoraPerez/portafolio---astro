@@ -1,0 +1,379 @@
+---
+import OrbitingCircles from './OrbitingCircles.astro';
+import LogoLoop from './LogoLoop.astro';
+
+const skills = [
+  {
+    category: "Frontend & Mobile",
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg>`,
+    description: "Creación de interfaces reactivas con Angular 19, Next.js 15 y apps móviles nativas con Expo.",
+    tags: [
+      { name: "Angular 19", slug: "angular" },
+      { name: "Next.js 15", slug: "nextdotjs" },
+      { name: "React Native", slug: "react" },
+      { name: "Vue.js", slug: "vuedotjs" },
+      { name: "Expo", slug: "expo" }
+    ]
+  },
+  {
+    category: "Backend & Logic",
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><path d="m18 16 4-4-4-4"/><path d="m6 8-4 4 4 4"/><path d="m14.5 4-5 16"/></svg>`,
+    description: "Desarrollo de servicios escalables con .NET 8, NestJS y PHP/Laravel bajo Clean Architecture.",
+    tags: [
+      { name: ".NET 8", slug: "dotnet" },
+      { name: "C#", slug: "csharp" },
+      { name: "NestJS", slug: "nestjs" },
+      { name: "Laravel", slug: "laravel" },
+      { name: "PHP", slug: "php" }
+    ]
+  },
+  {
+    category: "Persistence & ORMs",
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5V19A9 3 0 0 0 21 19V5"/><path d="M3 12A9 3 0 0 0 21 12"/></svg>`,
+    description: "Dominio de modelado de datos con EF Core, Eloquent, Prisma y Mongoose.",
+    tags: [
+      { name: "EF Core", slug: "dotnet" },
+      { name: "Eloquent", slug: "laravel" },
+      { name: "Prisma", slug: "prisma" },
+      { name: "Mongoose", slug: "mongoose" },
+      { name: "Sequelize", slug: "sequelize" }
+    ]
+  },
+  {
+    category: "Styles & Design",
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>`,
+    description: "Sistemas de diseño modernos usando Sass/SCSS, Tailwind y metodologías BEM.",
+    tags: [
+      { name: "Sass", slug: "sass" },
+      { name: "Tailwind", slug: "tailwindcss" },
+      { name: "CSS3", slug: "css3" },
+      { name: "Vanilla JS", slug: "javascript" },
+      { name: "TypeScript", slug: "typescript" }
+    ]
+  },
+  {
+    category: "Infra & Cloud",
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><path d="M12 2v8"/><path d="m16 6-4 4-4-4"/><rect width="20" height="8" x="2" y="14" rx="2"/><path d="M6 18h.01"/><path d="M10 18h.01"/></svg>`,
+    description: "Despliegue y gestión de contenedores en la nube con enfoque en alta disponibilidad.",
+    tags: [
+      { name: "Docker", slug: "docker" },
+      { name: "AWS S3", slug: "amazonaws" },
+      { name: "Git", slug: "git" },
+      { name: "PostgreSQL", slug: "postgresql" },
+      { name: "MongoDB", slug: "mongodb" }
+    ]
+  },
+  {
+    category: "Strategy & Soft",
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
+    description: "Liderazgo de equipos técnicos bajo metodologías ágiles para entregas continuas.",
+    tags: [
+      { name: "Agile", slug: "scrumalliance" },
+      { name: "Scrum", slug: "scrumalliance" },
+      { name: "SaaS", slug: "paloaltonetworks" },
+      { name: "Producción", slug: "paloaltonetworks" }
+    ]
+  }
+];
+---
+
+<section id="habilidades">
+  <div class="section-container">
+    <div class="section-label">
+      <span class="label-line"></span>
+      <span>Habilidades</span>
+      <span class="label-line"></span>
+    </div>
+
+    <h2 class="section-title">
+      Mi <span class="highlight-text">Stack Tecnológico</span>
+    </h2>
+    <p class="section-subtitle">
+      Tecnologías con las que construyo soluciones de alto impacto en producción
+    </p>
+
+    <!-- Tech logos loop -->
+    <div class="tech-loop-container">
+      <LogoLoop />
+    </div>
+
+    <div class="habilidades-content">
+      <!-- Left Cards -->
+      <div class="skills-column side">
+        {skills.slice(0, 3).map((group) => (
+          <div class="skill-card">
+            <div class="skill-card-header">
+              <span class="skill-icon" set:html={group.icon}></span>
+              <h3 class="skill-category">{group.category}</h3>
+            </div>
+            <p class="skill-description">{group.description}</p>
+            <div class="skill-tags">
+              {group.tags.map(tag => (
+                <span class="tech-tag">
+                  <img src={`https://cdn.simpleicons.org/${tag.slug}/white`} alt="" width="14" height="14" />
+                  {tag.name}
+                </span>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Center Orbiting Circles -->
+      <div class="skills-column center">
+        <div class="orbit-wrapper">
+          <OrbitingCircles />
+          <div class="orbit-glow"></div>
+        </div>
+      </div>
+
+      <!-- Right Cards -->
+      <div class="skills-column side">
+        {skills.slice(3, 6).map((group) => (
+          <div class="skill-card">
+            <div class="skill-card-header">
+              <span class="skill-icon" set:html={group.icon}></span>
+              <h3 class="skill-category">{group.category}</h3>
+            </div>
+            <p class="skill-description">{group.description}</p>
+            <div class="skill-tags">
+              {group.tags.map(tag => (
+                <span class="tech-tag">
+                  <img src={`https://cdn.simpleicons.org/${tag.slug}/white`} alt="" width="14" height="14" />
+                  {tag.name}
+                </span>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  #habilidades {
+    padding: 6rem 2rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .section-subtitle {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    text-align: center;
+    margin-bottom: 4rem;
+    opacity: 0.8;
+  }
+
+  .tech-loop-container {
+    margin-bottom: 6rem;
+  }
+
+  .habilidades-content {
+    display: grid;
+    grid-template-columns: 1fr minmax(auto, 400px) 1fr;
+    align-items: center;
+    gap: 2rem;
+    position: relative;
+  }
+
+  .skills-column {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .skills-column.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .orbit-wrapper {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .orbit-glow {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(0, 212, 255, 0.15) 0%, transparent 70%);
+    filter: blur(40px);
+    z-index: -1;
+  }
+
+  .skill-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 22px;
+    padding: 1.5rem;
+    backdrop-filter: blur(12px);
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .skill-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+
+  .skill-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(0, 212, 255, 0.3);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
+    box-shadow: 
+      0 20px 40px rgba(0,0,0,0.4),
+      0 0 20px rgba(0,212,255,0.05);
+  }
+
+  .skill-card:hover::before {
+    opacity: 1;
+  }
+
+  .skill-card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .skill-icon { 
+    font-size: 1.8rem;
+    filter: drop-shadow(0 0 10px rgba(255,255,255,0.2));
+  }
+
+  .skill-category {
+    font-size: 1.2rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+  }
+
+  .skill-description {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    opacity: 0.9;
+  }
+
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  .tech-tag {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: var(--text-secondary);
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 0.4rem 0.8rem;
+    border-radius: 10px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .tech-tag img {
+    opacity: 0.7;
+    transition: opacity 0.3s;
+  }
+
+  .skill-card:hover .tech-tag {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.15);
+    color: white;
+    transform: translateY(-2px);
+  }
+
+  .skill-card:hover .tech-tag img {
+    opacity: 1;
+  }
+
+  .section-title {
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 2rem;
+    text-align: center;
+    color: var(--text-primary);
+  }
+
+  .highlight-text {
+    background: linear-gradient(90deg, var(--cyan), #0099ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    justify-content: center;
+  }
+
+  .label-line {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+    width: 60px;
+  }
+
+  @media (max-width: 1200px) {
+    .habilidades-content {
+      grid-template-columns: 1fr 300px 1fr;
+      gap: 1rem;
+    }
+  }
+
+  @media (max-width: 1000px) {
+    .habilidades-content {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+    
+    .skills-column.center {
+      order: -1;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+  }
+
+  @media (max-width: 600px) {
+    #habilidades {
+      padding: 4rem 1.5rem;
+    }
+    
+    .tech-tags {
+      justify-content: center;
+    }
+    
+    .skill-card {
+      padding: 1.5rem;
+    }
+  }
+</style>
