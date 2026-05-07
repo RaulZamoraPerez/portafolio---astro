@@ -6,10 +6,16 @@ interface Props {
 }
 
 const { size = 1, color = "#5227FF", className = "" } = Astro.props;
+
+const papers = [
+  { label: "Certificado Digyto", icon: "🏆", link: "/reconocimientos/certifcados/Raul Emmanuel Zamora Pérez-1.pdf" },
+  { label: "Nacional Mérida", icon: "🥇", link: "#" },
+  { label: "English Academy", icon: "🎓", link: "#" }
+];
 ---
 
 <div class={`folder-container ${className}`} style={`--size: ${size}; --color: ${color};`}>
-  <div class="folder">
+  <div class="folder" id="interactive-folder">
     <!-- Back part of the folder -->
     <div class="folder-back">
       <div class="folder-tab"></div>
@@ -17,37 +23,23 @@ const { size = 1, color = "#5227FF", className = "" } = Astro.props;
     
     <!-- Paper content inside -->
     <div class="folder-papers">
-      <div class="paper paper-1">
-        <span class="tech-tag">Premio Juventud 2025</span>
-      </div>
-      <div class="paper paper-2">
-        <span class="tech-tag">DGETI Nac. 2022</span>
-      </div>
-      <div class="paper paper-3">
-        <span class="tech-tag">Fundación Nemi</span>
-      </div>
-      
-      <!-- Award Icons -->
-      <div class="flying-icon fi-1">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#FFD700" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6M18 9h1.5a2.5 2.5 0 0 0 0-5H18M4 22h16M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22M18 2H6v7a6 6 0 0 0 12 0V2z"/></svg>
-      </div>
-      <div class="flying-icon fi-2">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#C0C0C0" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
-      </div>
-      <div class="flying-icon fi-3">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#CD7F32" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-      </div>
-      <div class="flying-icon fi-4">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-      </div>
+      {papers.map((paper, i) => (
+        <a href={paper.link} target="_blank" class={`paper paper-${i+1}`}>
+          <div class="paper-content">
+            <div class="paper-icon-svg">
+               <span style="font-size: 1.4rem;">{paper.icon}</span>
+            </div>
+            <span class="tech-tag">{paper.label}</span>
+          </div>
+        </a>
+      ))}
     </div>
 
     <!-- Front flap -->
     <div class="folder-front">
       <div class="folder-logo">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="16 18 22 12 16 6"></polyline>
-          <polyline points="8 6 2 12 8 18"></polyline>
+        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 384 512">
+          <path fill="currentColor" d="M97.12 362.63c-8.69-8.69-4.16-6.24-25.12-11.85c-9.51-2.55-17.87-7.45-25.43-13.32L1.2 448.7c-4.39 10.77 3.81 22.47 15.43 22.03l52.69-2.01L105.56 507c8 8.44 22.04 5.81 26.43-4.96l52.05-127.62c-10.84 6.04-22.87 9.58-35.31 9.58c-19.5 0-37.82-7.59-51.61-21.37M382.8 448.7l-45.37-111.24c-7.56 5.88-15.92 10.77-25.43 13.32c-21.07 5.64-16.45 3.18-25.12 11.85c-13.79 13.78-32.12 21.37-51.62 21.37c-12.44 0-24.47-3.55-35.31-9.58L252 502.04c4.39 10.77 18.44 13.4 26.43 4.96l36.25-38.28l52.69 2.01c11.62.44 19.82-11.27 15.43-22.03M263 340c15.28-15.55 17.03-14.21 38.79-20.14c13.89-3.79 24.75-14.84 28.47-28.98c7.48-28.4 5.54-24.97 25.95-45.75c10.17-10.35 14.14-25.44 10.42-39.58c-7.47-28.38-7.48-24.42 0-52.83c3.72-14.14-.25-29.23-10.42-39.58c-20.41-20.78-18.47-17.36-25.95-45.75c-3.72-14.14-14.58-25.19-28.47-28.98c-27.88-7.61-24.52-5.62-44.95-26.41c-10.17-10.35-25-14.4-38.89-10.61c-27.87 7.6-23.98 7.61-51.9 0c-13.89-3.79-28.72.25-38.89 10.61c-20.41 20.78-17.05 18.8-44.94 26.41c-13.89 3.79-24.75 14.84-28.47 28.98c-7.47 28.39-5.54 24.97-25.95 45.75c-10.17 10.35-14.15 25.44-10.42 39.58c7.47 28.36 7.48 24.4 0 52.82c-3.72 14.14.25 29.23 10.42 39.59c20.41 20.78 18.47 17.35 25.95 45.75c3.72 14.14 14.58 25.19 28.47 28.98C104.6 325.96 106.27 325 121 340c13.23 13.47 33.84 15.88 49.74 5.82a39.68 39.68 0 0 1 42.53 0c15.89 10.06 36.5 7.65 49.73-5.82M97.66 175.96c0-53.03 42.24-96.02 94.34-96.02s94.34 42.99 94.34 96.02s-42.24 96.02-94.34 96.02s-94.34-42.99-94.34-96.02"/>
         </svg>
       </div>
     </div>
@@ -72,9 +64,11 @@ const { size = 1, color = "#5227FF", className = "" } = Astro.props;
     position: relative;
     width: var(--f-width);
     height: var(--f-height);
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
     transform-style: preserve-3d;
     cursor: pointer;
+    backface-visibility: hidden;
+    will-change: transform;
   }
 
   .folder:hover {
@@ -108,19 +102,21 @@ const { size = 1, color = "#5227FF", className = "" } = Astro.props;
     background: var(--f-color);
     border-radius: 12px;
     transform-origin: bottom;
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 10; /* High z-index */
-    transform: translateZ(20px); /* Keep it in front of papers */
+    z-index: 10;
+    transform: translateZ(25px); /* Ensure it's clearly in front */
     box-shadow: 
       inset 0 10px 20px rgba(255, 255, 255, 0.15),
       0 5px 15px rgba(0, 0, 0, 0.3);
+    backface-visibility: hidden;
   }
 
-  .folder:hover .folder-front {
-    transform: translateZ(20px) rotateX(-50deg);
+  .folder:hover .folder-front,
+  .folder.is-open .folder-front {
+    transform: translateZ(25px) rotateX(-50deg);
   }
 
   .folder-logo {
@@ -145,25 +141,42 @@ const { size = 1, color = "#5227FF", className = "" } = Astro.props;
   .paper {
     position: absolute;
     inset: 0;
-    background: rgba(255, 255, 255, 0.98);
-    border-radius: 8px;
-    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 12px;
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    padding: 10px;
-    text-align: center;
+    padding: 15px;
+    backface-visibility: hidden;
+    will-change: transform;
+  }
+
+  .paper-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+    width: 100%;
+  }
+
+  .paper-icon-svg {
+    width: 32px;
+    height: 32px;
+    color: var(--f-color);
+    filter: drop-shadow(0 0 8px var(--f-color));
   }
 
   .tech-tag {
-    color: var(--f-color);
-    font-size: 0.7rem;
+    color: #1a1a1a;
+    font-size: 0.6rem;
     font-weight: 800;
-    font-family: var(--font-code);
     text-transform: uppercase;
-    pointer-events: none;
+    letter-spacing: 0.05em;
+    text-align: center;
   }
 
   .flying-icon {
@@ -193,18 +206,16 @@ const { size = 1, color = "#5227FF", className = "" } = Astro.props;
   .fi-3 { --tx: -45px; --ty: -170px; --rot: 5deg;   }
   .fi-4 { --tx: 45px;  --ty: -160px; --rot: -5deg;  }
 
-  .folder:hover .fi-1 { transform: translate(var(--tx), var(--ty)) rotate(var(--rot)); transition-delay: 0.1s; }
-  .folder:hover .fi-2 { transform: translate(var(--tx), var(--ty)) rotate(var(--rot)); transition-delay: 0.2s; }
-  .folder:hover .fi-3 { transform: translate(var(--tx), var(--ty)) rotate(var(--rot)); transition-delay: 0.3s; }
-  .folder:hover .fi-4 { transform: translate(var(--tx), var(--ty)) rotate(var(--rot)); transition-delay: 0.4s; }
-
   .paper-1 { transform: translateY(0) translateZ(0); }
   .paper-2 { transform: translateY(-2px) rotate(-1deg) translateZ(1px); }
   .paper-3 { transform: translateY(-4px) rotate(1deg) translateZ(2px); }
 
-  .folder:hover .paper-1 { transform: translateY(-60px) rotate(-2deg) translateZ(5px); }
-  .folder:hover .paper-2 { transform: translateY(-90px) rotate(2deg) translateZ(10px); }
-  .folder:hover .paper-3 { transform: translateY(-120px) rotate(-1deg) translateZ(15px); }
+  .folder:hover .paper-1, .folder.is-open .paper-1 { transform: translateY(-70px) rotate(-5deg) translateZ(10px); }
+  .folder:hover .paper-2, .folder.is-open .paper-2 { transform: translateY(-110px) rotate(3deg) translateZ(20px); }
+  .folder:hover .paper-3, .folder.is-open .paper-3 { transform: translateY(-150px) rotate(-2deg) translateZ(30px); }
+
+  .folder:hover .fi-1, .folder.is-open .fi-1 { transform: translate(var(--tx), var(--ty)) rotate(var(--rot)); transition-delay: 0.1s; }
+  .folder:hover .fi-2, .folder.is-open .fi-2 { transform: translate(var(--tx), var(--ty)) rotate(var(--rot)); transition-delay: 0.2s; }
 
   /* Glass effect for premium look */
   .folder-front::after {
@@ -216,3 +227,18 @@ const { size = 1, color = "#5227FF", className = "" } = Astro.props;
     pointer-events: none;
   }
 </style>
+
+<script>
+  const folders = document.querySelectorAll('.folder');
+  folders.forEach(folder => {
+    folder.addEventListener('click', (e) => {
+      e.stopPropagation();
+      folder.classList.toggle('is-open');
+    });
+  });
+
+  // Close when clicking outside
+  document.addEventListener('click', () => {
+    folders.forEach(f => f.classList.remove('is-open'));
+  });
+</script>

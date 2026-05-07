@@ -40,8 +40,8 @@ import Terminal from './Terminal.astro';
 
       <!-- Description -->
       <p class="hero-desc">
-        Con experiencia práctica liderando sistemas reales en producción. Apasionado 
-        por soluciones de alto impacto con arquitecturas limpias y escalables.
+        Especialista en transformar visiones complejas en sistemas de alto rendimiento. 
+        Enfocado en construir software escalable con arquitecturas limpias y experiencias de usuario premium.
       </p>
 
       <!-- CTA Buttons -->
@@ -470,14 +470,18 @@ import Terminal from './Terminal.astro';
     }
 
     .hero-actions {
-      flex-direction: column;
-      width: 100%;
-      gap: 0.8rem;
-    }
-
-    .btn-primary, .btn-secondary {
-      width: 100%;
+      flex-direction: row;
       justify-content: center;
+      width: 100%;
+      gap: 0.6rem;
+    }
+    
+    .btn-primary, .btn-secondary {
+      width: auto;
+      flex: 1;
+      padding: 0.7rem 1rem;
+      font-size: 0.85rem;
+      white-space: nowrap;
     }
   }
 
